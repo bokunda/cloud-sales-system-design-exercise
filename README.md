@@ -14,40 +14,51 @@ This means that the focus should be on **multi-region** design.
 ![Infrastructural HLA Diagram](resources/CloudSalesSystem.hla.io-Infrastructure-HLA.drawio.png "Infrastructual HLA Diagram")
 
 ### Follow the Sun pattern
-TODO:
+By definition, the traditional "follow the sun" model is a type of global workflow in which issues can be handled by and passed between offices in different time zones, increasing responsiveness and reducing delays.
+
+In the software industry and multi-region software, this means that the primary region will be the region where the day is, in this way, the main load will be on the region where the users are the most active.
+
+Routing and primary region selection should be done using **AWS Route 53 service**.
 
 ### Auto-Scaling
-TODO:
+Kubernetes will be used as a container orchestrator so all .NET Web Api-s, Service Workers,.. will be on Kubernetes. Increase and decrease pod policy should be defined after performance testing.
 
 ### Database
-TODO:
+Amazon Aurora DB will be used as a database because of its great multi-region capability. This service is great and easy to use as well because PostgreSQL or MySQL can be used.
 
 ### Logs (Datadog)
-TODO:
+The system should use a reliable system for storing the logs. One of the best products on the market is Datadog. This service can be used for logs monitoring, infrastructure monitoring, reports, and alerts...
 
 ### Final stack
-TODO:
+- AWS Route 53
+- AWS API Gateway
+- Kubernetes
+- Docker
+- AWS Aurora DB Cluster
+- AWS SQS
+- Datadog
+- S3 buckets
+- .NET Web API
+- .NET Service Workers
 
 ## Architectural HLA
 Here, the focus was on service segregation, so all major parts are in separate services. The database is shared between resources.
 
+The idea was to have an async pipeline for order processing. When the Customer creates an order, order details are stored on **S3** as well, the path to the S3 is used to notify the **Invoice Processor**, and the notification should be sent using an **AWS SQS** message.
+
+Next, when the invoice is ready, Invoice Processor sends invoice details to S3 and sends AWS SQS message with a file path to **Email Processor**.
+
+The Email Processor should pick up all the attachments, and create and send an email. Email payload will be stored in S3 as well.
+
+The reason why all the payloads are stored in S3 is because of the possibility to restart the process for an order that failed for some reason.
+
+The S3 bucket for this pipeline will have a **cleanup policy set to 30 days**.
+
 ![Architectural HLA Diagram](resources/CloudSalesSystem.hla.io-Services-HLA.drawio.png "Architectural HLA Diagram")
 
-### Technical stack
-- Amazon API Gateway
-- Kubernetes
-- Docker
-- .NET Web API
-- .NET Service Workers
-- S3 Buckets
-- Amazon Aurora DB
-- Datatod
 
 ## Deep Dive
-TODO:
-
 ### Order Service
-TODO:
 
 #### Create Order
 Creating order is one of the most complex operations in the system so that action is used for the "Deep Dive" part.
