@@ -30,16 +30,16 @@ Amazon Aurora DB will be used as a database because of its great multi-region ca
 The system should use a reliable system for storing the logs. One of the best products on the market is Datadog. This service can be used for logs monitoring, infrastructure monitoring, reports, and alerts...
 
 ### Final stack
-- AWS Route 53
-- AWS API Gateway
-- Kubernetes
-- Docker
-- AWS Aurora DB Cluster
-- AWS SQS
-- Datadog
-- S3 buckets
-- .NET Web API
-- .NET Service Workers
+- [AWS Route 53](https://aws.amazon.com/route53/)
+- [AWS API Gateway](https://aws.amazon.com/api-gateway/)
+- [Kubernetes](https://kubernetes.io/)
+- [Docker](https://www.docker.com/)
+- [AWS Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.html)
+- [AWS SQS](https://aws.amazon.com/sqs/)
+- [Datadog](https://www.datadoghq.com/)
+- [S3](https://aws.amazon.com/s3/)
+- [.NET Web API](https://dotnet.microsoft.com/en-us/apps/aspnet/apis)
+- [.NET Background Workers](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-7.0&tabs=visual-studio)
 
 ## Architectural HLA
 Here, the focus was on service segregation, so all major parts are in separate services. The database is shared between resources.
