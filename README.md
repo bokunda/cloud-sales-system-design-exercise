@@ -11,7 +11,7 @@ The focus was on:
 In requirements, there was a statement that the solution will serve customers in **Europe** and **APAC** (Asia Pacific) regions. 
 This means that the focus should be on **multi-region** design.
 
-![Infrastructural HLA Diagram](system-design/CloudSalesSystem.hla.io-Infrastructure-HLA.drawio.png "Infrastructual HLA Diagram")
+![Infrastructural HLA Diagram](resources/CloudSalesSystem.hla.io-Infrastructure-HLA.drawio.png "Infrastructual HLA Diagram")
 
 ### Follow the Sun pattern
 TODO:
@@ -31,7 +31,7 @@ TODO:
 ## Architectural HLA
 Here, the focus was on service segregation, so all major parts are in separate services. The database is shared between resources.
 
-![Architectural HLA Diagram](system-design/CloudSalesSystem.hla.io-Services-HLA.drawio.png "Architectural HLA Diagram")
+![Architectural HLA Diagram](resources/CloudSalesSystem.hla.io-Services-HLA.drawio.png "Architectural HLA Diagram")
 
 ### Technical stack
 - Amazon API Gateway
@@ -51,7 +51,7 @@ TODO:
 
 #### Create Order
 Creating order is one of the most complex operations in the system so that action is used for the "Deep Dive" part.
-![Deep Dive Order Service - Create Order Diagram](system-design/CloudSalesSystem.hla.io-Order-Service-Deep-Dive.drawio.png "Deep Dive Order Service - Create Order Diagram")
+![Deep Dive Order Service - Create Order Diagram](resources/CloudSalesSystem.hla.io-Order-Service-Deep-Dive.drawio.png "Deep Dive Order Service - Create Order Diagram")
 
 ## Data Model
-![Data Model Diagram](system-design/CludSalesSystem_DB.png "Data Model Diagram")
+![Data Model Diagram](resources/CludSalesSystem_DB.png "Data Model Diagram")
