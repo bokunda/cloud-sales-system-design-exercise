@@ -66,3 +66,8 @@ Creating order is one of the most complex operations in the system so that actio
 
 ## Data Model
 ![Data Model Diagram](resources/CludSalesSystem_DB.png "Data Model Diagram")
+
+## Other System Design Remarks
+
+- **Identity Provider** - For identity provider we should use the service that satisfies all the requirements, the bonus is if the team is familiar with the chosen service.
+- **Order Processor Pipeline Orchestrator Service** - This service may be used as an improvement of the existing implementation. Basically this service will control the process of creating invoices, sending emails, and error handling.
