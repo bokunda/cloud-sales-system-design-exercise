@@ -67,6 +67,9 @@ Creating order is one of the most complex operations in the system so that actio
 ## Data Model
 ![Data Model Diagram](resources/CludSalesSystem_DB.png "Data Model Diagram")
 
+- If there is a need for tracking how many times license changed an owner, table **LicenseAccounts** (license_id, account_id, created_at) should be created, and column **account_id** should be removed from **License** table.
+- If there is a need for tracking how many times license expiery date has been changed, table **LicenseValidToDate** (license_id, valid_to_date, created_at) should be created, and column **valid_to_date** should be removed from **License** table.
+
 ## Other System Design Remarks
 
 - **Identity Provider** - For identity provider we should use the service that satisfies all the requirements, the bonus is if the team is familiar with the chosen service.
