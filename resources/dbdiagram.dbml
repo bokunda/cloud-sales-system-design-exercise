@@ -1,0 +1,101 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Customer {
+  id guid [primary key]
+  first_name nvarchar(255)
+  last_name nvarchar(255)
+  email nvarchar(255)
+  active bool
+  note nvarchar(255)
+  type int
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table Account {
+  id guid [primary key]
+  name nvarchar(255) [not null, unique]
+  description nvarchar(255)
+  customer_id guid [not null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table CustomerSubscription {
+  customer_id guid [primary key]
+  subscription_id guid  [primary key]
+}
+
+Table Subscription {
+  id guid [primary key]
+  name nvarchar(255) [not null, unique]
+  description nvarchar(255)
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table SubscriptionItem {
+  id guid [primary key]
+  subscription_id guid [not null]
+  sales_product_id guid [not null]
+  product_name nvarchar(255) [not null]
+  quantity int [not null]
+  state int [not null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table SalesProduct {
+  id guid [primary key]
+  name nvarchar(255)
+  description nvarchar(255)
+  ccp_product_id guid [not null]
+  purchase_price decimal
+  salses_price decimal
+}
+
+Table Invoice {
+  id guid [primary key]
+  invoice_number nvarchar(255)
+  generated_at datetime
+  subscription_item_id guid
+  amount int
+  document_path nvarchar(255)
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table InvoiceLine {
+  id guid [primary key]
+  invoice_id guid [not null]
+  sales_product_id guid [not null]
+  purchased_price decimal [not null]
+  sales_price decimal [not null]
+  vat decimal [not null]
+}
+
+Table License {
+  id guid [primary key]
+  account_id guid
+  subscription_item_id guid [not null]
+  key nvarchar(255)
+  valid_to_date datetime [not null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Ref: Customer.id < Account.customer_id
+Ref: Customer.id - CustomerSubscription.customer_id
+Ref: Subscription.id - CustomerSubscription.subscription_id
+
+Ref: Subscription.id > SubscriptionItem.subscription_id
+
+Ref: Account.id > License.account_id
+Ref: License.subscription_item_id < SubscriptionItem.id
+
+Ref: Invoice.subscription_item_id < SubscriptionItem.id
+Ref: SubscriptionItem.sales_product_id - SalesProduct.id
+
+Ref: Invoice.id < InvoiceLine.invoice_id
+Ref: SalesProduct.id - InvoiceLine.sales_product_id
